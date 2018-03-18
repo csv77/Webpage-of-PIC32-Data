@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+#table, #table th, #table td {
+	border: 1px solid #ddd;
+	border-collapse: collapse;
+	font-family: Verdana;
+	text-align: center;
+}
+
+#table {
+	width: 60%;
+	margin: auto;
+}
+
+#div1 {
+	margin: auto;
+}
+
+#table th, #table td {
+	padding: 3px;
+}
+
+#table th {
+	background-color: #8080FF;
+	color: white;
+}
+
+td#t02 {
+	width: 20%;
+}
+
+td#t01 {
+	width: 35%;
+}
+
+td#t03 {
+	width: 5%;
+}
+
+tr:nth-child(even){background-color: #F2F2F2;}
+
+caption {
+	font-size: 20px;
+	margin: 20px;
+}
