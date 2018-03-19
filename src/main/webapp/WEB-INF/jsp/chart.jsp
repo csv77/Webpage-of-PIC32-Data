@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE>
 <html>
 <head>
@@ -64,6 +65,9 @@
 						fontColor: 'black',
 						text: 'Temperature and humidity data from PIC32'
 					},
+					legend: {
+						position: 'bottom',
+					},
 					scales: {
 						xAxes: [{
 			                ticks: {
@@ -80,11 +84,21 @@
 							position: 'left',
 							fontStyle: 'normal',
 							fontColor: 'black',
+							scaleLabel: {
+								display: true,
+								labelString: 'Temperature',
+							},
 							ticks: {
-				                beginAtZero:true,
+								angleLines: {
+									display: false,
+								},
+								beginAtZero:true,
 				                callback: function(value, index, values) {
 			                        return value + ' °C';
-			                    }
+			                    },
+								suggestedMin: 10,
+								suggestedMax: 50,
+								
 				            },
 							id: 'y-axis-1',
 						}, {
@@ -93,11 +107,17 @@
 							position: 'right',
 							fontStyle: 'normal',
 							fontColor: 'black',
+							scaleLabel: {
+								display: true,
+								labelString: 'Humidity',
+							},
 							ticks: {
 				                beginAtZero:true,
 				                callback: function(value, index, values) {
 			                        return value + ' %';
-			                    }
+			                    },
+								suggestedMin: 20,
+								suggestedMax: 80,
 				            },
 							id: 'y-axis-2',
 						}],
@@ -108,9 +128,11 @@
 	</script>
 	
 	<br>
-	<div align="center">
-		<input id="btn" type="button" onclick="location.href='/SensorData';" value="Back" />
-		<input id="btn" type="button" onclick="location.href='/SensorData/table';" value="Show Data in table" />
-	</div>	
+	<form:form method="post">
+ 		<div id="buttongroup">
+			<input id="btn" type="submit" value="Back to start page" name="home"/>
+			<input id="btn" type="submit" value="Show Data in table" name="table"/>
+	 	</div>
+ 	</form:form>
 </body>
 </html>

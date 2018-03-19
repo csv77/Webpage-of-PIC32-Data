@@ -13,6 +13,7 @@ public class ExceptionHandlingAdvice {
 	public String handleRuntimeExceptions(RuntimeException e, Model model) {
 		Date today = new Date();
 		model.addAttribute("today", today);
+		model.addAttribute("error", e.toString());
 		return "error";
 	}
 }

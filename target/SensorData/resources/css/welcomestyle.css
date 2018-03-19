@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+#header, #dateline {
+	font-family: Verdana;
+	align: center;
+}
+
 #btn {
 	background-color: #8080FF;
     border: none;
