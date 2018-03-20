@@ -15,9 +15,10 @@
 </head>
 <body>
 	<div align="center">	
-		<div class="chart-container" style="height:350px; width:700px">
+		<div class="chart-container" style="height:400px; width:800px">
 		    <canvas id="chart1"></canvas>
 		</div>
+		<br>
 		<div class="chart-container" style="height:150px; width:350px">
 		    <canvas id="chart2"></canvas>
 		</div>
@@ -88,8 +89,8 @@
 			                    autoSkip: false,
 			                    fontStyle: 'normal',
 								fontColor: 'black',
-			                    maxRotation: 20,
-			                    minRotation: 20
+			                    maxRotation: 45,
+			                    minRotation: 45
 			                }
 			            }],
 						yAxes: [{
