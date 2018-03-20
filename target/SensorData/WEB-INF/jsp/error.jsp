@@ -11,18 +11,18 @@
 	<link href="<c:url value="/resources/css/welcomestyle.css" />" rel="stylesheet">
 </head>
 <body>
-	<h2 id="header" align="center">Welcome to SensorData Page</h2>
-	<p id="p" align="center">
+	<h2 id="header">Welcome to SensorData Page</h2>
+	<p id="dateline">
 		Today is <fmt:formatDate type="both" dateStyle="long" timeStyle="long" value="${today}"/>.
 	</p>
 	<hr/>
-	<p id="p" align="center">
+	<p id="dateline">
 		Something is not working! Check the error message here:<br>
 		${error}
 	</p>
 	<br>
 	<form:form method="post">
- 		<div align="center">
+ 		<div id="buttongroup">
 			<input id="btn" type="submit" value="Back to start page" name="home"/>
 	 	</div>
  	</form:form>

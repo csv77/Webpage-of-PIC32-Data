@@ -31,7 +31,7 @@
 	</table>
 	<br>
 	<form:form method="post">
- 		<div align="center">
+ 		<div id="buttongroup">
 			<input id="btn" type="submit" value="Back to start page" name="home"/>
 			<input id="btn" type="submit" value="Show Data with line chart" name="chart"/>
 	 	</div>

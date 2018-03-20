@@ -12,13 +12,13 @@
 </head>
 
 <body>
-	<h2 id="header" align="center">Welcome to SensorData Page</h2>
-	<p id="dateline" align="center">
+	<h2 id="header">Welcome to SensorData Page</h2>
+	<p id="dateline">
 		Today is <fmt:formatDate type="both" dateStyle="long" timeStyle="long" value="${today}"/>.
 	</p>
 	<hr/>
 	<form:form method="post">
- 		<div align="center">
+ 		<div id="buttongroup">
 			<input id="btn" type="submit" value="Show Data in table" name="table"/>
 			<input id="btn" type="submit" value="Show Data with line chart" name="chart"/>
 	 	</div>

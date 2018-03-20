@@ -1,8 +1,12 @@
 @charset "UTF-8";
 
 #header, #dateline {
-	font-family: Verdana;
-	align: center;
+	font-family: Arial;
+	text-align: center;
+}
+
+#buttongroup {
+	text-align: center;
 }
 
 #btn {
