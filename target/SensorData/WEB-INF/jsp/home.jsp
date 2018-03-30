@@ -22,6 +22,9 @@
 			<input id="btn" type="submit" value="Show Data in table" name="table"/>
 			<input id="btn" type="submit" value="Show Data with line chart" name="chart"/>
 	 	</div>
+	 	<div id="buttongroup">
+	 		
+	 	</div>
  	</form:form>
 </body>
 </html>

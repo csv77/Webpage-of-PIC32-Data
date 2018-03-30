@@ -23,7 +23,7 @@ public class SensorPageController {
 	}
 	
 	@GetMapping
-    public String homePage(Model model) {
+	public String homePage(Model model) {
         Date today = new Date();
         model.addAttribute("today", today);
         return "home";

@@ -68,5 +68,40 @@ caption {
 }
 
 .main {
-	margin: auto;
+	text-align: center;
+	margin: 0;
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border: 1px;
+}
+.ui.header {
+	font-family: Verdana;
+	font-size: 20px;
+}
+.ui.button {
+	background-color: #8080FF;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    width: 250px;
+    height: 40px;
+}
+.inputfield {
+	width: 250px;
+	height: 40px;
+	border-radius: 5px;
+	padding: 10px 10px;
+}
+.ui.input {
+	padding: 5px;
+}
+.ui.error {
+	font-family: Verdana;
+	font-size: 14px;
 }

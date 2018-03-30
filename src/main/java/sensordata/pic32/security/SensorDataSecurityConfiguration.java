@@ -24,10 +24,11 @@ public class SensorDataSecurityConfiguration extends WebSecurityConfigurerAdapte
 		http.authorizeRequests()
 			.anyRequest().authenticated()
 		.and()
-			.formLogin().loginPage("/login.jsp")
-			.defaultSuccessUrl("/home.jsp")
-			/*.failureUrl("login.jsp?error=true")*/
-			.permitAll();
+			.formLogin()
+				.loginPage("/login.jsp")
+				/*.defaultSuccessUrl("/home.jsp")*/.permitAll()
+			.failureUrl("/login.jsp?error=true")
+			;
 	}
 	
 	@Bean
