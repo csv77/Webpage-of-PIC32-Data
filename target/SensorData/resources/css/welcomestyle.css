@@ -12,6 +12,7 @@
 #btn {
 	background-color: #8080FF;
     border: none;
+    border-radius: 5px;
     color: white;
     padding: 15px 25px;
     text-align: center;

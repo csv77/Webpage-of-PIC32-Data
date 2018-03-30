@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
+@SuppressWarnings("deprecation")
 @Configuration
 @EnableWebSecurity
 public class SensorDataSecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -17,17 +18,18 @@ public class SensorDataSecurityConfiguration extends WebSecurityConfigurerAdapte
 		auth.inMemoryAuthentication()
 		.withUser("csabi").password("1234").authorities("USER");
 	}
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers("/*").hasAuthority("USER")
+			.anyRequest().authenticated()
 		.and()
-		.formLogin()
-		.and()
-		.csrf().disable();
+			.formLogin().loginPage("/login.jsp")
+			.defaultSuccessUrl("/home.jsp")
+			/*.failureUrl("login.jsp?error=true")*/
+			.permitAll();
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Bean
 	public static NoOpPasswordEncoder passwordEncoder() {
 		return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();

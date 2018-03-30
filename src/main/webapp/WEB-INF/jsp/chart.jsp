@@ -56,12 +56,14 @@
 				        label: 'Temperature',
 				        data: temperatureDataArray,
 				        fill: false,
+				        lineTension: 0,
 				        borderColor: '#20FF20',
 				        borderWidth: 3,
 				        yAxisID: 'y-axis-1',
 				    }, {
 				    	label: 'Humidity',
 				    	data: humidityDataArray,
+				    	lineTension: 0,
 				    	borderColor: '#8080FF',
 				    	fill: false,
 				    	borderWidth: 3,
@@ -79,6 +81,9 @@
 						fontStyle: 'normal',
 						fontColor: 'black',
 						text: 'Temperature and humidity data from PIC32'
+					},
+					animation: {
+						duration: 0,
 					},
 					legend: {
 						position: 'bottom',
@@ -175,6 +180,9 @@
 					},
 					legend: {
 						position: 'bottom',
+					},
+					animation: {
+						duration: 0,
 					},
 					scales: {
 						xAxes: [{
