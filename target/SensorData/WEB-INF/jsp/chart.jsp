@@ -8,8 +8,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>SensorData Chart</title>
-	<link href="<c:url value="/resources/css/tablestyle.css" />" rel="stylesheet">
-	<link href="<c:url value="/resources/css/welcomestyle.css" />" rel="stylesheet">
+	<link href="<c:url value="/resources/css/sensordatastyle.css" />" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 	
 </head>

@@ -8,7 +8,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Runtime Exception</title>
-	<link href="<c:url value="/resources/css/welcomestyle.css" />" rel="stylesheet">
+	<link href="<c:url value="/resources/css/sensordatastyle.css" />" rel="stylesheet">
 </head>
 <body>
 	<h2 id="header">Welcome to SensorData Page</h2>
