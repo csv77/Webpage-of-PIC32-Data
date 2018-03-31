@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -12,19 +12,24 @@
 </head>
 
 <body>
-	<h2 id="header">Welcome to SensorData Page</h2>
-	<p id="dateline">
+	<h2 class="header">Welcome to SensorData Page</h2>
+	<p class="dateline">
 		Today is <fmt:formatDate type="both" dateStyle="long" timeStyle="long" value="${today}"/>.
 	</p>
 	<hr/>
-	<form:form method="post">
- 		<div id="buttongroup">
-			<input id="btn" type="submit" value="Show Data in table" name="table"/>
-			<input id="btn" type="submit" value="Show Data with line chart" name="chart"/>
+	<form method="post" action="<c:url value="/" />">
+ 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		<div class="buttongroup">
+ 			<input class="btn" type="submit" value="Show Data in table" name="table"/>
+			<input class="btn" type="submit" value="Show Data with line chart" name="chart"/>
 	 	</div>
-	 	<div id="buttongroup">
-	 		
-	 	</div>
- 	</form:form>
+	</form>
+	<br>
+	<br>
+ 	<form action="<c:url value="/login?logout" />">
+		<div class="buttongroup" align="center">
+			<button class="btn">Logout</button>
+		</div>
+	</form>
 </body>
 </html>

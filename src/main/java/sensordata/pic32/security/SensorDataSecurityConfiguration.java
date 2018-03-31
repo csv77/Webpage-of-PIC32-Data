@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SensorDataSecurityConfiguration extends WebSecurityConfigurerAdapter {
-	
+		
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
@@ -22,13 +22,15 @@ public class SensorDataSecurityConfiguration extends WebSecurityConfigurerAdapte
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
+			.antMatchers("/resources/**").permitAll()
 			.anyRequest().authenticated()
 		.and()
 			.formLogin()
-				.loginPage("/login.jsp")
-				/*.defaultSuccessUrl("/home.jsp")*/.permitAll()
-			.failureUrl("/login.jsp?error=true")
-			;
+				.loginPage("/login")
+				.permitAll()
+				.failureUrl("/login?error")
+			.and()
+				.logout().logoutSuccessUrl("/login?logout");
 	}
 	
 	@Bean

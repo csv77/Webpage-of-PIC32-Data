@@ -245,9 +245,9 @@
 	<br>
 	<br>
 	<form:form method="post">
- 		<div id="buttongroup">
-			<input id="btn" type="submit" value="Back to start page" name="home"/>
-			<input id="btn" type="submit" value="Show Data in table" name="table"/>
+ 		<div class="buttongroup">
+			<input class="btn" type="submit" value="Back to start page" name="home"/>
+			<input class="btn" type="submit" value="Show Data in table" name="table"/>
 	 	</div>
  	</form:form>
 </body>

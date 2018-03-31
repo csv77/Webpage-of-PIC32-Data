@@ -8,13 +8,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import sensordata.pic32.dao.SensorDataDao;
 import sensordata.pic32.domain.SensorDataObject;
 
 @Controller
 @RequestMapping("/")
-public class SensorPageController {
+@EnableWebMvc
+public class SensorPageController implements WebMvcConfigurer {
 	
 	SensorDataDao sensorDataDao;
 	
@@ -22,9 +26,21 @@ public class SensorPageController {
 		this.sensorDataDao = sensorDataDao;
 	}
 	
-	@GetMapping
+	@GetMapping(value = "/login")
+	public String loginPage(@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout, Model model) {
+		if(logout != null) {
+			model.addAttribute("logout", new String("You've been logged out."));
+		}
+		else if(error != null) {
+			model.addAttribute("error", new String("Wrong username or password."));
+		}
+		return "login";
+	}
+	
+	@GetMapping(value = {"/", "/home"})
 	public String homePage(Model model) {
-        Date today = new Date();
+	    Date today = new Date();
         model.addAttribute("today", today);
         return "home";
     }
