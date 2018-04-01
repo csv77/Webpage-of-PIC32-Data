@@ -27,8 +27,8 @@ public class SensorPageController implements WebMvcConfigurer {
 	}
 	
 	@GetMapping(value = "/login")
-	public String loginPage(@RequestParam(value = "error", required = false) String error,
-			@RequestParam(value = "logout", required = false) String logout, Model model) {
+	public String loginPage(@RequestParam(value = "logout", required = false) String logout, 
+			@RequestParam(value = "error", required = false) String error, Model model) {
 		if(logout != null) {
 			model.addAttribute("logout", new String("You've been logged out."));
 		}

@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.table, .table.th, .table.td {
+.table, .table th, .table td {
 	border: 1px solid #ddd;
 	border-collapse: collapse;
 	font-family: Verdana;
@@ -12,11 +12,11 @@
 	margin: auto;
 }
 
-.table.th, .table.td {
+.table th, .table td {
 	padding: 3px;
 }
 
-.table.th {
+.table th {
 	background-color: #8080FF;
 	color: white;
 }

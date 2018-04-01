@@ -6,17 +6,19 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@SuppressWarnings("deprecation")
 @Configuration
 @EnableWebSecurity
 public class SensorDataSecurityConfiguration extends WebSecurityConfigurerAdapter {
-		
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
-		.withUser("csabi").password("1234").authorities("USER");
+		.passwordEncoder(passwordEncoder())
+		.withUser("csabi")
+			.password("$2a$04$6cQ2xN58KhZCmzJDTsd4IeN2Okq8lk6IyGmjrFmHOEzGywhg5STwS")
+			.authorities("USER");
 	}
 	
 	@Override
@@ -34,7 +36,7 @@ public class SensorDataSecurityConfiguration extends WebSecurityConfigurerAdapte
 	}
 	
 	@Bean
-	public static NoOpPasswordEncoder passwordEncoder() {
-		return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 }

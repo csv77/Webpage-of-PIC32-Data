@@ -21,18 +21,19 @@
 			<div class="ui input">
 				<button class="ui button">Login</button>
 			</div>
-			<c:if test="${not empty error}">
-				<div class="ui error" style="display: block;">
-					Authentication Failed.<br/>
-					${error}
-				</div>
-			</c:if>
-			<c:if test="${not empty logout}">
-				<div class="ui logout" style="display: block;">
-					${logout}
-				</div>
-			</c:if>
+			
 		</form>
+		<c:if test="${param.error != null}">
+			<div class="ui error" style="display: block;">
+				Authentication Failed.<br/>
+				${error}
+			</div>
+		</c:if>
+		<c:if test="${param.logout != null}">
+			<div class="ui logout" style="display: block;">
+				${logout}
+			</div>
+		</c:if>
 	</div>
 </body>
 </html>
