@@ -21,13 +21,17 @@
  		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<div class="buttongroup">
  			<input class="btn" type="submit" value="Show Data in table" name="table"/>
-			<input class="btn" type="submit" value="Show Data with line chart" name="chart"/>
+	 	</div>
+	 </form>
+	 <form method="post" action="<c:url value="/" />">
+	 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		<div class="buttongroup">
+ 			<input class="btn" type="submit" value="Show Data with line chart" name="chart"/>
 	 	</div>
 	</form>
-	<br>
-	<br>
- 	<form action="<c:url value="/login?logout" />">
-		<div class="buttongroup" align="center">
+	<form action="<c:url value="/login?logout" />">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		<div class="buttongroup">
 			<button class="btn">Logout</button>
 		</div>
 	</form>

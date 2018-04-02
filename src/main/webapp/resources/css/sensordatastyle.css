@@ -66,12 +66,16 @@ caption {
 .main {
 	text-align: center;
 	margin: 0;
+	padding: 10px 20px;
 	position: absolute;
     top: 50%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    border: 1px;
+    border: 2px;
+    border-color: grey lightgrey lightgrey grey;
+    border-radius: 5px;
+    border-style: solid;
 }
 .ui.header {
 	font-family: Verdana;
