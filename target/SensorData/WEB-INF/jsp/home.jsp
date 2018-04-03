@@ -30,7 +30,6 @@
 	 	</div>
 	</form>
 	<form action="<c:url value="/login?logout" />">
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<div class="buttongroup">
 			<button class="btn">Logout</button>
 		</div>

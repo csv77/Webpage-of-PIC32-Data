@@ -20,6 +20,7 @@ public class SensorDataDaoConfiguration {
 	
 	@Bean DataSource dataSource() {
 		HikariDataSource dataSource = new HikariDataSource();
+		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUsername("csabi");
 		dataSource.setPassword("ae293147");
 		dataSource.setJdbcUrl("jdbc:mysql://localhost/sajat");
