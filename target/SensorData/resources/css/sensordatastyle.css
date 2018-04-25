@@ -66,6 +66,7 @@ caption {
 .main {
 	text-align: center;
 	margin: 0;
+	background-color: #E9F6FB;
 	padding: 10px 20px;
 	position: absolute;
     top: 50%;

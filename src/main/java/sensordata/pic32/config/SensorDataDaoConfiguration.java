@@ -23,7 +23,7 @@ public class SensorDataDaoConfiguration {
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUsername("csabi");
 		dataSource.setPassword("ae293147");
-		dataSource.setJdbcUrl("jdbc:mysql://localhost/sajat");
+		dataSource.setJdbcUrl("jdbc:mysql://173.249.44.63:3306/sajat");
 		dataSource.setMinimumIdle(2);
 		dataSource.setMaximumPoolSize(5);
 		return dataSource;
