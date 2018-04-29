@@ -30,10 +30,10 @@ public class SensorPageController implements WebMvcConfigurer {
 	public String loginPage(@RequestParam(value = "logout", required = false) String logout, 
 			@RequestParam(value = "error", required = false) String error, Model model) {
 		if(logout != null) {
-			model.addAttribute("logout", new String("You've been logged out."));
+			model.addAttribute("logout", "You've been logged out.");
 		}
 		else if(error != null) {
-			model.addAttribute("error", new String("Wrong username or password."));
+			model.addAttribute("error", "Wrong username or password.");
 		}
 		return "login";
 	}

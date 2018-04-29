@@ -29,9 +29,10 @@
  			<input class="btn" type="submit" value="Show Data with line chart" name="chart"/>
 	 	</div>
 	</form>
-	<form action="<c:url value="/login?logout" />">
+	<form method="post" action="<c:url value="/logout" />">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<div class="buttongroup">
-			<button class="btn">Logout</button>
+			<input class="btn" type="submit" value="Logout"/>
 		</div>
 	</form>
 </body>

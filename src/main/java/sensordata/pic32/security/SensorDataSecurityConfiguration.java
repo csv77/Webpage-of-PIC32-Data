@@ -1,5 +1,6 @@
 package sensordata.pic32.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -12,8 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class SensorDataSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+	@Autowired
+	protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
 		.passwordEncoder(passwordEncoder())
 		.withUser("csabi")
@@ -23,16 +24,25 @@ public class SensorDataSecurityConfiguration extends WebSecurityConfigurerAdapte
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-			.antMatchers("/resources/**").permitAll()
-			.anyRequest().authenticated()
-		.and()
-			.formLogin()
+		http/*.requiresChannel()
+				.antMatchers("/**", "/perform_login").requiresSecure()
+			.and()*/
+				.authorizeRequests()
+				.antMatchers("/resources/**").permitAll()
+				.anyRequest().authenticated()
+			.and()
+				.formLogin()
 				.loginPage("/login")
+				.loginProcessingUrl("/home")
 				.permitAll()
 				.failureUrl("/login?error")
 			.and()
-				.logout().logoutSuccessUrl("/login?logout");
+				.logout()
+				.logoutUrl("/logout")
+				.logoutSuccessUrl("/login?logout")
+				.permitAll()
+			.and()
+				.headers();
 	}
 	
 	@Bean
