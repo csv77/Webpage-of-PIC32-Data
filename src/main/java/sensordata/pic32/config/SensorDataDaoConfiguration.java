@@ -18,7 +18,8 @@ public class SensorDataDaoConfiguration {
 		return new SensorDataDaoImpl(dataSource());
 	}
 	
-	@Bean DataSource dataSource() {
+	@Bean 
+	public DataSource dataSource() {
 		HikariDataSource dataSource = new HikariDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUsername("csabi");
