@@ -32,6 +32,7 @@
 	<form:form method="post">
  		<div class="buttongroup">
 			<input class="btn" type="submit" value="Back to start page" name="home"/>
+			<input class="btn" type="submit" value="Show Data in Excel" name="excel"/>
 			<input class="btn" type="submit" value="Show Data with line chart" name="chart"/>
 	 	</div>
  	</form:form>

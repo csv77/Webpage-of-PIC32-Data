@@ -248,6 +248,7 @@
  		<div class="buttongroup">
 			<input class="btn" type="submit" value="Back to start page" name="home"/>
 			<input class="btn" type="submit" value="Show Data in table" name="table"/>
+			<input class="btn" type="submit" value="Show Data in Excel" name="excel"/>
 	 	</div>
  	</form:form>
 </body>

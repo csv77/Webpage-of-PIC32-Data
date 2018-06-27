@@ -29,6 +29,12 @@
  			<input class="btn" type="submit" value="Show Data with line chart" name="chart"/>
 	 	</div>
 	</form>
+	<form method="post" action="<c:url value="/" />">
+	 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		<div class="buttongroup">
+ 			<input class="btn" type="submit" value="Show Data in Excel" name="excel"/>
+	 	</div>
+	</form>
 	<form method="post" action="<c:url value="/logout" />">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<div class="buttongroup">
