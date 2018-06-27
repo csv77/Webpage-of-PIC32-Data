@@ -63,7 +63,7 @@ public class SensorPageController implements WebMvcConfigurer {
     public String excelPage(Model model) {
         List<SensorDataObject> sensorData = sensorDataDao.getAllSensorData(); 
         model.addAttribute("sensorDataTable", sensorData);
-        return "sensordataExcel";
+        return "sensorData";
     }
 	
 	@PostMapping(params = {"home"})
