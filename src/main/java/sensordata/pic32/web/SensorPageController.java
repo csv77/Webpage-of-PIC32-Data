@@ -59,6 +59,13 @@ public class SensorPageController implements WebMvcConfigurer {
         return "chart";
     }
 	
+	@PostMapping(params = {"excel"})
+    public String excelPage(Model model) {
+        List<SensorDataObject> sensorData = sensorDataDao.getAllSensorData(); 
+        model.addAttribute("sensorDataTable", sensorData);
+        return "excel";
+    }
+	
 	@PostMapping(params = {"home"})
     public String backToHomePage(Model model) {
         Date today = new Date(); 
