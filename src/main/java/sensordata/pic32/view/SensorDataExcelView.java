@@ -65,6 +65,7 @@ public class SensorDataExcelView extends AbstractXlsxView {
 		legend.setPosition(LegendPosition.BOTTOM);
 		
 		LineChartData data = chart.getChartDataFactory().createLineChartData();
+		chart.setTitleFormula("SensorData");
 		
 		ChartAxis bottomAxis = chart.getChartAxisFactory().createDateAxis(AxisPosition.BOTTOM);
 		ValueAxis leftAxis = chart.getChartAxisFactory().createValueAxis(AxisPosition.LEFT);
