@@ -17,13 +17,29 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.charts.AxisCrosses;
+import org.apache.poi.ss.usermodel.charts.AxisPosition;
+import org.apache.poi.ss.usermodel.charts.ChartAxis;
+import org.apache.poi.ss.usermodel.charts.ChartDataSource;
+import org.apache.poi.ss.usermodel.charts.DataSources;
+import org.apache.poi.ss.usermodel.charts.LegendPosition;
+import org.apache.poi.ss.usermodel.charts.LineChartData;
+import org.apache.poi.ss.usermodel.charts.LineChartSeries;
+import org.apache.poi.ss.usermodel.charts.ValueAxis;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFChart;
+import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
+import org.apache.poi.xssf.usermodel.XSSFDrawing;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.charts.XSSFChartLegend;
 import org.springframework.web.servlet.view.document.AbstractXlsxView;
 
 import sensordata.pic32.domain.SensorDataObject;
 
 public class SensorDataExcelView extends AbstractXlsxView {
 	
-	private List<String> headersList = Arrays.asList("Index", "Date", "Temperature", "Humidity");
+	private List<String> headersList = Arrays.asList("Index", "Date", "Temperature (°C)", "Humidity (%)");
 	
 	@Override
 	protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
@@ -32,7 +48,7 @@ public class SensorDataExcelView extends AbstractXlsxView {
 		final List<SensorDataObject> listOfSensorData = (List<SensorDataObject>)model.get("sensorDataTable");
 		final Map<String, CellStyle> styles = setStyles(workbook);
 		
-		Sheet sheet = workbook.createSheet("SensorData");
+		XSSFSheet sheet = ((XSSFWorkbook)workbook).createSheet("SensorData");
 		createHeader(sheet, styles.get("header"));
 		
 		listOfSensorData.forEach(sensorData -> createTableRow(sheet, sensorData, styles));
@@ -40,6 +56,30 @@ public class SensorDataExcelView extends AbstractXlsxView {
 		sheet.createFreezePane(1, 1);
 		
 		setWidth(sheet);
+		
+		XSSFDrawing drawing = sheet.createDrawingPatriarch();
+		XSSFClientAnchor anchor = drawing.createAnchor(0, 0, 0, 0, 6, 2, 22, 26);
+		
+		XSSFChart chart = drawing.createChart(anchor);
+		XSSFChartLegend legend = chart.getOrCreateLegend();
+		legend.setPosition(LegendPosition.BOTTOM);
+		
+		LineChartData data = chart.getChartDataFactory().createLineChartData();
+		
+		ChartAxis bottomAxis = chart.getChartAxisFactory().createDateAxis(AxisPosition.BOTTOM);
+		ValueAxis leftAxis = chart.getChartAxisFactory().createValueAxis(AxisPosition.LEFT);
+		leftAxis.setCrosses(AxisCrosses.AUTO_ZERO);
+		
+		ChartDataSource<Number> x = DataSources.fromNumericCellRange(sheet, new CellRangeAddress(1, 10, 0, 0));
+		ChartDataSource<Number> yTemp = DataSources.fromNumericCellRange(sheet, new CellRangeAddress(1, 10, 2, 2));
+		ChartDataSource<Number> yHum = DataSources.fromNumericCellRange(sheet, new CellRangeAddress(1, 10, 3, 3));
+		
+		LineChartSeries tempSerie = data.addSeries(x, yTemp);
+		LineChartSeries humSerie = data.addSeries(x, yHum);
+		tempSerie.setTitle("Temperature");
+		humSerie.setTitle("Humidity");
+		
+		chart.plot(data, new ChartAxis[] {bottomAxis, leftAxis});
 	}
 	
 	private void createHeader(Sheet sheet, CellStyle style) {
@@ -65,7 +105,7 @@ public class SensorDataExcelView extends AbstractXlsxView {
 		cellOfTemp.setCellValue(sensorData.getTemperature());
 		cellOfTemp.setCellStyle(styles.get("temperature"));
 		Cell cellOfHum = row.createCell(3);
-		cellOfHum.setCellValue(sensorData.getHumidity() / 100);
+		cellOfHum.setCellValue(sensorData.getHumidity());
 		cellOfHum.setCellStyle(styles.get("humidity"));
 		
 	}
@@ -95,11 +135,11 @@ public class SensorDataExcelView extends AbstractXlsxView {
 		styles.put("date", styleOfDate);
 		
 		CellStyle styleOfTemp = workbook.createCellStyle();
-		styleOfTemp.setDataFormat(workbook.createDataFormat().getFormat("###0.00 C°"));
+		styleOfTemp.setDataFormat(workbook.createDataFormat().getFormat("###0.00"));
 		styles.put("temperature", styleOfTemp);
 		
 		CellStyle styleOfHum = workbook.createCellStyle();
-		styleOfHum.setDataFormat(workbook.createDataFormat().getFormat("###0.00 %"));
+		styleOfHum.setDataFormat(workbook.createDataFormat().getFormat("###0.00"));
 		styles.put("humidity", styleOfHum);
 		
 		return styles;
