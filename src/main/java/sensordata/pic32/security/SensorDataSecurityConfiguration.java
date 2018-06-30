@@ -1,25 +1,37 @@
 package sensordata.pic32.security;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import sensordata.pic32.config.SensorDataDaoConfiguration;
+
 @Configuration
+@Import(SensorDataDaoConfiguration.class)
 @EnableWebSecurity
 public class SensorDataSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
+	@Value("#{dataSource}")
+	private DataSource dataSource;
+	
 	@Autowired
 	protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
+		auth.jdbcAuthentication()
+		.dataSource(dataSource)
 		.passwordEncoder(passwordEncoder())
-		.withUser("csabi")
-			.password("$2a$04$6cQ2xN58KhZCmzJDTsd4IeN2Okq8lk6IyGmjrFmHOEzGywhg5STwS")
-			.authorities("USER");
+		.usersByUsernameQuery(
+				"SELECT username, password, enabled FROM users WHERE username = ?")
+		.authoritiesByUsernameQuery(
+				"SELECT username, authority FROM authorities WHERE username = ?");
 	}
 	
 	@Override
