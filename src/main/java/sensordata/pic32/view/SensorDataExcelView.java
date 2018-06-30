@@ -33,6 +33,12 @@ import org.apache.poi.xssf.usermodel.XSSFDrawing;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.charts.XSSFChartLegend;
+import org.openxmlformats.schemas.drawingml.x2006.chart.CTChart;
+import org.openxmlformats.schemas.drawingml.x2006.chart.CTTitle;
+import org.openxmlformats.schemas.drawingml.x2006.chart.CTTx;
+import org.openxmlformats.schemas.drawingml.x2006.main.CTRegularTextRun;
+import org.openxmlformats.schemas.drawingml.x2006.main.CTTextBody;
+import org.openxmlformats.schemas.drawingml.x2006.main.CTTextParagraph;
 import org.springframework.web.servlet.view.document.AbstractXlsxView;
 
 import sensordata.pic32.domain.SensorDataObject;
@@ -57,30 +63,7 @@ public class SensorDataExcelView extends AbstractXlsxView {
 		
 		setWidth(sheet);
 		
-		XSSFDrawing drawing = sheet.createDrawingPatriarch();
-		XSSFClientAnchor anchor = drawing.createAnchor(0, 0, 0, 0, 6, 2, 22, 26);
-		
-		XSSFChart chart = drawing.createChart(anchor);
-		XSSFChartLegend legend = chart.getOrCreateLegend();
-		legend.setPosition(LegendPosition.BOTTOM);
-		
-		LineChartData data = chart.getChartDataFactory().createLineChartData();
-		chart.setTitleFormula("SensorData");
-		
-		ChartAxis bottomAxis = chart.getChartAxisFactory().createDateAxis(AxisPosition.BOTTOM);
-		ValueAxis leftAxis = chart.getChartAxisFactory().createValueAxis(AxisPosition.LEFT);
-		leftAxis.setCrosses(AxisCrosses.AUTO_ZERO);
-		
-		ChartDataSource<Number> x = DataSources.fromNumericCellRange(sheet, new CellRangeAddress(1, 10, 0, 0));
-		ChartDataSource<Number> yTemp = DataSources.fromNumericCellRange(sheet, new CellRangeAddress(1, 10, 2, 2));
-		ChartDataSource<Number> yHum = DataSources.fromNumericCellRange(sheet, new CellRangeAddress(1, 10, 3, 3));
-		
-		LineChartSeries tempSerie = data.addSeries(x, yTemp);
-		LineChartSeries humSerie = data.addSeries(x, yHum);
-		tempSerie.setTitle("Temperature");
-		humSerie.setTitle("Humidity");
-		
-		chart.plot(data, new ChartAxis[] {bottomAxis, leftAxis});
+		drawLineChart(sheet);
 	}
 	
 	private void createHeader(Sheet sheet, CellStyle style) {
@@ -96,16 +79,16 @@ public class SensorDataExcelView extends AbstractXlsxView {
 	
 	private void createTableRow(Sheet sheet, SensorDataObject sensorData, Map<String, CellStyle> styles) {
 		Row row = sheet.createRow(sheet.getLastRowNum() + 1);
-		row.createCell(0).setCellValue(sensorData.getId());
+		row.createCell(Columns.INDEX_COLUMN.ordinal()).setCellValue(sensorData.getId());
 		
-		Cell cellOfDate = row.createCell(1);
+		Cell cellOfDate = row.createCell(Columns.DATE_COLUMN.ordinal());
 		cellOfDate.setCellValue(sensorData.getDate());
 		cellOfDate.setCellStyle(styles.get("date"));
 		
-		Cell cellOfTemp = row.createCell(2);
+		Cell cellOfTemp = row.createCell(Columns.TEMPERATURE_COLUMN.ordinal());
 		cellOfTemp.setCellValue(sensorData.getTemperature());
 		cellOfTemp.setCellStyle(styles.get("temperature"));
-		Cell cellOfHum = row.createCell(3);
+		Cell cellOfHum = row.createCell(Columns.HUMIDITY_COLUMN.ordinal());
 		cellOfHum.setCellValue(sensorData.getHumidity());
 		cellOfHum.setCellStyle(styles.get("humidity"));
 		
@@ -144,5 +127,46 @@ public class SensorDataExcelView extends AbstractXlsxView {
 		styles.put("humidity", styleOfHum);
 		
 		return styles;
+	}
+	
+	private void drawLineChart(XSSFSheet sheet) {
+		int lastRowNum = sheet.getLastRowNum();
+		XSSFDrawing drawing = sheet.createDrawingPatriarch();
+		XSSFClientAnchor anchor = drawing.createAnchor(0, 0, 0, 0, 6, 2, 16, 17);
+		
+		XSSFChart chart = drawing.createChart(anchor);
+		XSSFChartLegend legend = chart.getOrCreateLegend();
+		legend.setPosition(LegendPosition.BOTTOM);
+		
+		LineChartData data = chart.getChartDataFactory().createLineChartData();
+		CTChart ctChart = chart.getCTChart();
+        CTTitle title = ctChart.addNewTitle();
+        CTTx tx = title.addNewTx();
+        CTTextBody rich = tx.addNewRich();
+        rich.addNewBodyPr();
+        CTTextParagraph para = rich.addNewP();
+        CTRegularTextRun r = para.addNewR();
+        r.setT("SensorData Chart");
+        
+		ChartAxis bottomAxis = chart.getChartAxisFactory().createDateAxis(AxisPosition.BOTTOM);
+		ValueAxis leftAxis = chart.getChartAxisFactory().createValueAxis(AxisPosition.LEFT);
+		leftAxis.setCrosses(AxisCrosses.AUTO_ZERO);
+		
+		ChartDataSource<Number> x = 
+				DataSources.fromNumericCellRange(sheet,
+						new CellRangeAddress(1, lastRowNum, Columns.INDEX_COLUMN.ordinal(), Columns.INDEX_COLUMN.ordinal()));
+		ChartDataSource<Number> yTemp = 
+				DataSources.fromNumericCellRange(sheet, 
+						new CellRangeAddress(1, lastRowNum, Columns.TEMPERATURE_COLUMN.ordinal(), Columns.TEMPERATURE_COLUMN.ordinal()));
+		ChartDataSource<Number> yHum = 
+				DataSources.fromNumericCellRange(sheet, 
+						new CellRangeAddress(1, lastRowNum, Columns.HUMIDITY_COLUMN.ordinal(), Columns.HUMIDITY_COLUMN.ordinal()));
+		
+		LineChartSeries tempSerie = data.addSeries(x, yTemp);
+		LineChartSeries humSerie = data.addSeries(x, yHum);
+		tempSerie.setTitle("Temperature");
+		humSerie.setTitle("Humidity");
+		
+		chart.plot(data, new ChartAxis[] {bottomAxis, leftAxis});
 	}
 }

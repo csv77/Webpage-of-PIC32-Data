@@ -1,6 +1,7 @@
 sensordata\pic32\config\ViewResolverConfiguration.class
 sensordata\pic32\web\SensorDataWebApplicationInitializer.class
 sensordata\pic32\dao\SensorDataDao.class
+sensordata\pic32\view\Columns.class
 sensordata\pic32\domain\SensorDataObject.class
 sensordata\pic32\security\SensorDataSecurityConfiguration.class
 sensordata\pic32\web\ExceptionHandlingAdvice.class
