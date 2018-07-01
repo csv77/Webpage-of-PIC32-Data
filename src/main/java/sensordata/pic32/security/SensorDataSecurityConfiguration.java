@@ -3,7 +3,6 @@ package sensordata.pic32.security;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -20,7 +19,7 @@ import sensordata.pic32.config.SensorDataDaoConfiguration;
 @EnableWebSecurity
 public class SensorDataSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
-	@Value("#{dataSource}")
+	@Autowired
 	private DataSource dataSource;
 	
 	@Autowired
