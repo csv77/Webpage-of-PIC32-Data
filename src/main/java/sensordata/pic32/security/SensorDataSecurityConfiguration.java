@@ -36,9 +36,9 @@ public class SensorDataSecurityConfiguration extends WebSecurityConfigurerAdapte
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.requiresChannel()
+		http/*.requiresChannel()
 				.antMatchers("/login*").requiresSecure()
-			.and()
+			.and()*/
 				.authorizeRequests()
 				.antMatchers("/resources/**").permitAll()
 				.anyRequest().authenticated()
