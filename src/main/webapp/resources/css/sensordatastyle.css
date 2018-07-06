@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+.table, .table th, .table td {
+	border: 1px solid #ddd;
+	border-collapse: collapse;
+	font-family: Verdana;
+	text-align: center;
+}
+
+.table {
+	width: 60%;
+	margin: auto;
+}
+
+.table th, .table td {
+	padding: 3px;
+}
+
+.table th {
+	background-color: #8080FF;
+	color: white;
+}
+
+td.t02 {
+	width: 20%;
+}
+
+td.t01 {
+	width: 35%;
+}
+
+td.t03 {
+	width: 5%;
+}
+
+tr:nth-child(even) {
+	background-color: #F2F2F2;
+	}
+
+caption {
+	font-size: 20px;
+	margin: 20px;
+}
+
+.header, .dateline {
+	font-family: Arial;
+	text-align: center;
+}
+
+.buttongroup {
+	text-align: center;
+}
+
+.btn {
+	background-color: #8080FF;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    width: 20%;
+}
+
+.main {
+	text-align: center;
+	margin: 0;
+	background-color: #E9F6FB;
+	padding: 10px 20px;
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border: 2px;
+    border-color: grey lightgrey lightgrey grey;
+    border-radius: 5px;
+    border-style: solid;
+}
+.ui.header {
+	font-family: Verdana;
+	font-size: 20px;
+}
+.ui.button {
+	background-color: #8080FF;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    width: 250px;
+    height: 40px;
+}
+.inputfield {
+	width: 250px;
+	height: 40px;
+	border-radius: 5px;
+	padding: 10px 10px;
+}
+.ui.input {
+	padding: 5px;
+}
+.ui.error, .ui.logout {
+	font-family: Verdana;
+	font-size: 14px;
+	font-weight: bold;
+}
