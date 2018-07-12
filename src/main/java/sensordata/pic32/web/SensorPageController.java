@@ -54,8 +54,18 @@ public class SensorPageController implements WebMvcConfigurer {
 	
 	@PostMapping(params = {"chart"})
     public String chartPage(Model model) {
-        List<SensorDataObject> sensorData = sensorDataDao.getAllSensorData(); 
+        List<SensorDataObject> sensorData = sensorDataDao.getAllSensorData();
+        double sumTemperature = 0;
+        double sumHumidity = 0;
+        for(SensorDataObject sensorDataObject : sensorData) {
+        	sumTemperature += sensorDataObject.getTemperature();
+        	sumHumidity += sensorDataObject.getHumidity();
+        }
+        double avgTemperature = sumTemperature / sensorData.size();
+        double avgHumidity = sumHumidity / sensorData.size();
         model.addAttribute("sensorDataTable", sensorData);
+        model.addAttribute("averageTemperature", avgTemperature);
+        model.addAttribute("averageHumidity", avgHumidity);
         return "chart";
     }
 	

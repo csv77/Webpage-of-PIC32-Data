@@ -34,15 +34,8 @@
 			humidityDataArray.push(parseFloat("${sensordata.humidity}"));
 		</c:forEach>
 		
-		var sumT = 0;
-		var sumH = 0;
-		for(var i = 0; i < temperatureDataArray.length; i++) {
-			sumT += temperatureDataArray[i];
-			sumH += humidityDataArray[i];
-		}
-		
-		var averageT = sumT / temperatureDataArray.length;
-		var averageH = sumH / humidityDataArray.length;
+		var averageT = parseFloat("${averageTemperature}");
+		var averageH = parseFloat("${averageHumidity}");
 		
 		window.onload = function() {
 			var ctx = document.getElementById("chart1");
